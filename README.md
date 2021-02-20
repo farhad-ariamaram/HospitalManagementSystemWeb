@@ -1,9 +1,9 @@
 ![.net](https://img.shields.io/badge/.NETFramework-4.7.2-blue.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Release
+## Publish
 http://farhadariamaram.somee.com/
-Project released on this url
+Project published on this url
 
 ## Overview
 - Hospital Management System web application
