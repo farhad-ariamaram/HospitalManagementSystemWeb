@@ -1,0 +1,108 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.header-text {
+    font-size: x-large
+}
+
+.hospital-name-text {
+    font-size: large;
+    font-weight: bold
+}
+
+[id^="tile"] {
+    text-align: center;
+    margin: 5px;
+    width: 30%;
+    height: 150px;
+    color: white;
+}
+
+    [id^="tile"]:hover {
+        transform: scale(1.04);
+    }
+
+    [id^="tile"]:active {
+        transform: scale(0.99);
+    }
+
+[id$="main-text"] {
+    font-size: 3vw;
+    font-weight: bold
+}
+
+[id$="second-text"] {
+    font-size: small;
+    font-weight: bold
+}
+
+#tile1 {
+    background-color: #2e6394;
+}
+
+#tile2 {
+    background-color: #91ab31;
+}
+
+#tile3 {
+    background-color: #e58600;
+}
+
+#tile4 {
+    background-color: #6a0040;
+}
+
+#tile5 {
+    background-color: #3a3245;
+}
+
+#tile6 {
+    background-color: #805eae;
+}
+
+#tile7 {
+    background-color: #6a4626
+}
+
+
+
+.back {
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 25px 25px;
+    cursor:pointer
+}
+
+    .back:hover {
+        background-color: aliceblue
+    }
+
+    .back:active {
+        transform: scale(0.94);
+    }
+
+.opbtn{
+    font-weight:bold
+}

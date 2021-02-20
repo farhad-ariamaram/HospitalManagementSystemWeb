@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HospitalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BillNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="ReceptionistId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BillsHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BillNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReceptionistName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Special" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="ReceptionistId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientsHistories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="DoctorName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoomNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ReceptionistName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receptionists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BillPatient">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillReceptionist">
+          <End Role="Receptionists" Type="Self.Receptionists" Multiplicity="1" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receptionists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="ReceptionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentDoctor">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorPatient">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceptionistPatient">
+          <End Role="Receptionists" Type="Self.Receptionists" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receptionists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="ReceptionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomPatient">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalDBModelStoreContainer">
+          <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillsHistories" EntityType="Self.BillsHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientsHistories" EntityType="Self.PatientsHistories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receptionists" EntityType="Self.Receptionists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BillPatient" Association="Self.FK_BillPatient">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillReceptionist" Association="Self.FK_BillReceptionist">
+            <End Role="Receptionists" EntitySet="Receptionists" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentDoctor" Association="Self.FK_DepartmentDoctor">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorPatient" Association="Self.FK_DoctorPatient">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceptionistPatient" Association="Self.FK_ReceptionistPatient">
+            <End Role="Receptionists" EntitySet="Receptionists" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomPatient" Association="Self.FK_RoomPatient">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BillNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="ReceptionistId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_BillPatient" FromRole="Bills" ToRole="Patients" />
+          <NavigationProperty Name="Receptionist" Relationship="Self.FK_BillReceptionist" FromRole="Bills" ToRole="Receptionists" />
+        </EntityType>
+        <EntityType Name="BillsHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BillNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptionistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_DepartmentDoctor" FromRole="Departments" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Special" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_DepartmentDoctor" FromRole="Doctors" ToRole="Departments" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_DoctorPatient" FromRole="Doctors" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="ReceptionistId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_BillPatient" FromRole="Patients" ToRole="Bills" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_DoctorPatient" FromRole="Patients" ToRole="Doctors" />
+          <NavigationProperty Name="Receptionist" Relationship="Self.FK_ReceptionistPatient" FromRole="Patients" ToRole="Receptionists" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_RoomPatient" FromRole="Patients" ToRole="Rooms" />
+        </EntityType>
+        <EntityType Name="PatientsHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="DoctorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoomNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptionistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Receptionist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_BillReceptionist" FromRole="Receptionists" ToRole="Bills" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_ReceptionistPatient" FromRole="Receptionists" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_RoomPatient" FromRole="Rooms" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK_BillPatient">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillReceptionist">
+          <End Role="Receptionists" Type="Self.Receptionist" Multiplicity="1" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receptionists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="ReceptionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentDoctor">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorPatient">
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceptionistPatient">
+          <End Role="Receptionists" Type="Self.Receptionist" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receptionists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="ReceptionistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomPatient">
+          <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="BillsHistories" EntityType="Self.BillsHistory" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="PatientsHistories" EntityType="Self.PatientsHistory" />
+          <EntitySet Name="Receptionists" EntityType="Self.Receptionist" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <AssociationSet Name="FK_BillPatient" Association="Self.FK_BillPatient">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillReceptionist" Association="Self.FK_BillReceptionist">
+            <End Role="Receptionists" EntitySet="Receptionists" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentDoctor" Association="Self.FK_DepartmentDoctor">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorPatient" Association="Self.FK_DoctorPatient">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceptionistPatient" Association="Self.FK_ReceptionistPatient">
+            <End Role="Receptionists" EntitySet="Receptionists" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomPatient" Association="Self.FK_RoomPatient">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitalDBModelStoreContainer" CdmEntityContainer="HospitalDBEntities">
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="HospitalDBModel.Bill">
+              <MappingFragment StoreEntitySet="Bills">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ReceptionistId" ColumnName="ReceptionistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillsHistories">
+            <EntityTypeMapping TypeName="HospitalDBModel.BillsHistory">
+              <MappingFragment StoreEntitySet="BillsHistories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="ReceptionistName" ColumnName="ReceptionistName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="HospitalDBModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="HospitalDBModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Special" ColumnName="Special" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="HospitalDBModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="ReceptionistId" ColumnName="ReceptionistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientsHistories">
+            <EntityTypeMapping TypeName="HospitalDBModel.PatientsHistory">
+              <MappingFragment StoreEntitySet="PatientsHistories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
+                <ScalarProperty Name="ReceptionistName" ColumnName="ReceptionistName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receptionists">
+            <EntityTypeMapping TypeName="HospitalDBModel.Receptionist">
+              <MappingFragment StoreEntitySet="Receptionists">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="HospitalDBModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

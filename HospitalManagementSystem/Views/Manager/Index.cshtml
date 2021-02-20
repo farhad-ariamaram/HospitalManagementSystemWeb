@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row">
+    <div class="col-sm-6"><span class="hospital-name-text">بیمارستان : @ViewBag.HospitalName</span></div>
+    <div class="col-sm-6 text-right"><span class="hospital-name-text">مدیر: @ViewBag.ManagerName</span><img src="~/Content/images/User3.png" /></div>
+</div>
+<br />
+<div id="base-grid">
+    <div class="row">
+        <a href="/Manager/Department">
+            <div class="col-sm-3 pull-right btn" id="tile1">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/department.png" /></div>
+                    <div class="col-sm-6"><span id="tile1-main-text">مدیریت<br />ساختمان ها</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile1-second-text">Departments</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Manager/Doctor">
+            <div class="col-sm-3 pull-right btn" id="tile2">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/doctor.png" /></div>
+                    <div class="col-sm-6"><span id="tile2-main-text">مدیریت<br />پزشک ها</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile2-second-text">Doctors</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Manager/Patient">
+            <div class="col-sm-3 pull-right btn" id="tile3">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/patient.png" /></div>
+                    <div class="col-sm-6"><span id="tile3-main-text">مدیریت<br />بیماران</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile3-second-text">Patients</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a href="/Manager/Room">
+            <div class="col-sm-3 pull-right btn" id="tile4">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/room.png" /></div>
+                    <div class="col-sm-6"><span id="tile4-main-text">مدیریت<br />اتاق ها</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile4-second-text">Rooms</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Manager/Receptionist">
+            <div class="col-sm-3 pull-right btn" id="tile5">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/receptionist.png" /></div>
+                    <div class="col-sm-6"><span id="tile5-main-text">مدیریت<br />پذیرش ها</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile5-second-text">Receptionists</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Manager/Bill">
+            <div class="col-sm-3 pull-right btn" id="tile6">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/bill.png" /></div>
+                    <div class="col-sm-6"><span id="tile6-main-text">مدیریت<br />قبض ها</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile6-second-text">Bills</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a href="/Manager/Settings">
+            <div class="col-sm-3 pull-right btn" id="tile7">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/Support.png" /></div>
+                    <div class="col-sm-6"><span id="tile7-main-text">تنظیمات<br />نرم افزار</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile7-second-text">Settings</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <a href="/Main/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+    </div>
+</div>
+<br />
+
+
+

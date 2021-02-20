@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>سیستم مدیریت بیمارستان - نسخه وب - 1.0.0 </title>
+    <!--START CSS Section-->
+    @Styles.Render("~/Content/css")
+    @RenderSection("Styles", false)
+    <!--END CSS Section-->
+</head>
+<body>
+    <div class="container table-bordered">
+
+        <!--START Header Section-->
+        <div class="row header-text" id="header">
+            <div class="col-sm-12 text-center">سیستم مدیریت بیمارستان - نسخه 1.0.0</div>
+        </div>
+        <!--END Header Section-->
+        <!--START Content Section-->
+        <div class="row" id="content">
+            <div class="col-sm-12">
+                @RenderBody()
+            </div>
+        </div>
+        <!--END Content Section-->
+
+    </div>
+    <!--START JavaScript Section-->
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("Scripts", false)
+    <!--END JavaScript Section-->
+</body>
+</html>

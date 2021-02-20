@@ -1,0 +1,118 @@
+﻿@model HospitalManagementSystem.ViewModel.PatientVM
+
+@{
+    ViewBag.Title = "DepartmentEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12 text-right"><h2>ویرایش بیمار</h2></div>
+
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.patient.Id)
+            <table class="table" id="myTable">
+                <tr>
+                    <th></th>
+                    <th>
+                        پذیرش
+                    </th>
+                    <th>
+                        شماره اتاق
+                    </th>
+                    <th>
+                        پزشک
+                    </th>
+                    <th>
+                        جنسیت
+                    </th>
+                    <th>
+                        سن
+                    </th>
+                    <th>
+                        آدرس
+                    </th>
+                    <th>
+                        شماره تماس
+                    </th>
+                    <th>
+                        نام
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="ذخیره" class="btn btn-primary" />
+                        <a href="/Manager/Patient"><input type="button" value="انصراف" class="btn btn-default" /></a>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.ReceptionistId, Model.receptionists)
+                        @Html.ValidationMessageFor(model => model.patient.Receptionist, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.RoomId, Model.rooms)
+                        @Html.ValidationMessageFor(model => model.patient.Room, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.DoctorId, Model.doctors)
+                        @Html.ValidationMessageFor(model => model.patient.Doctor, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Gender, "", new { @class = "text-danger" })
+                        <span id="gender">زن</span>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Age, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Address, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.PhoneNo, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Name, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <a href="/Manager/Patient"><img class="back" src="~/Content/images/back3.png" /></a>
+    </div>
+</div>
+<br />
+
+@section Scripts{
+    <script>
+        $(function () {
+            if ($('#patient_Gender').is(":checked")) {
+                $("#gender").text("مرد");
+            } else {
+                $("#gender").text("زن");
+            }
+            $("#patient_Gender").change(function () {
+                if (this.checked) {
+                    $("#gender").text("مرد");
+                } else {
+                    $("#gender").text("زن");
+                }
+            });
+        });
+    </script>
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

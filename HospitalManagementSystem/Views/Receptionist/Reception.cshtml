@@ -1,0 +1,176 @@
+﻿@model HospitalManagementSystem.ViewModel.PatientVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <a id="CreateNew" class="btn btn-success pull-right">ایجاد بیمار جدید</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <h2>لیست بیماران&nbsp;</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("CreatePatient", "Receptionist", FormMethod.Post, new { id = "CreateForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table class="table" id="myTable">
+                        <tr>
+                            <th></th>
+                            <th>
+                                پذیرش
+                            </th>
+                            <th>
+                                شماره اتاق
+                            </th>
+                            <th>
+                                پزشک
+                            </th>
+                            <th>
+                                جنسیت
+                            </th>
+                            <th>
+                                سن
+                            </th>
+                            <th>
+                                آدرس
+                            </th>
+                            <th>
+                                شماره تماس
+                            </th>
+                            <th>
+                                نام
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.patients)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("ویرایش", "PatientEdit", new { id = item.Id }, new { @class = "btn btn-primary opbtn" })
+                                    @Html.ActionLink("حذف", "DeletePatient", new { id = item.Id }, new { @class = "btn btn-danger opbtn", onclick = "return confirm('مطمئن هستید?');" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Receptionist.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Room.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Doctor.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                    <span>@((item.Gender) ?"مرد":"زن")</span>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="/Receptionist/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            var html = `
+                <tr id="CurrentRow" style="display:none">
+                    <td>
+                        <input type="submit" value="ایجاد" class="btn btn-success" />
+                        <input type="button" value="انصراف" class="btn btn-default" id="cancel" />
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.ReceptionistId,Model.receptionists)
+                        @Html.ValidationMessageFor(model => model.patient.Receptionist, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.RoomId,Model.rooms)
+                        @Html.ValidationMessageFor(model => model.patient.Room, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.patient.DoctorId,Model.doctors)
+                        @Html.ValidationMessageFor(model => model.patient.Doctor, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Gender, "", new { @class = "text-danger" })
+                        <span id="gender">زن</span>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Age, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Age, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Address, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.PhoneNo, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.patient.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.patient.Name,"",new { @class = "text-danger" })
+                    </td>
+                </tr>
+                `;
+
+            $('#myTable tr:last').after(html);
+
+            $("#CreateNew").click(function () {
+                $("#CurrentRow").show();
+            });
+
+            $("#cancel").click(function () {
+                $("#CurrentRow").hide();
+            });
+
+            $("#patient_Gender").change(function () {
+                if (this.checked) {
+                    $("#gender").text("مرد");
+                } else {
+                    $("#gender").text("زن");
+                }
+            });
+    });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

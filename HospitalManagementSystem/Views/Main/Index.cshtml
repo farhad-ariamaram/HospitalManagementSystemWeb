@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="row text-center"><span class="hospital-name-text">بیمارستان : @ViewBag.HospitalName</span></div>
+<br />
+<div id="base-grid">
+    <div class="row">
+        <a href="/Manager/Index">
+            <div class="col-sm-3 pull-right btn" id="tile1">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/Manager3.png" /></div>
+                    <div class="col-sm-6"><span id="tile1-main-text">مدیر<br />بیمارستان</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile1-second-text">Hospital Manager</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Doctor/Index">
+            <div class="col-sm-3 pull-right btn" id="tile2">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/doctor.png" /></div>
+                    <div class="col-sm-6"><span id="tile2-main-text">پزشک<br />&nbsp;</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile2-second-text">Doctor</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="/Receptionist/Index">
+            <div class="col-sm-3 pull-right btn" id="tile3">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/receptionist.png" /></div>
+                    <div class="col-sm-6"><span id="tile3-main-text">مسئول<br />پذیرش</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile3-second-text">Receptionist</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a href="https://github.com/farhad-ariamaram/" target="_blank">
+            <div class="col-sm-3 pull-right btn" id="tile4">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/Support2.png" /></div>
+                    <div class="col-sm-6"><span id="tile4-main-text">ارتباط با<br />پشتیبانی</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile4-second-text">Support</span></div>
+                </div>
+            </div>
+        </a>
+        <a href="https://github.com/farhad-ariamaram/" target="_blank">
+            <div class="col-sm-3 pull-right btn" id="tile5">
+                <div class="row">
+                    <div class="col-sm-6"><img src="~/Content/images/aboutme1.png" /></div>
+                    <div class="col-sm-6"><span id="tile5-main-text">درباره<br />سازنده</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pull-left"><span id="tile5-second-text">Aboute Me</span></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<br />

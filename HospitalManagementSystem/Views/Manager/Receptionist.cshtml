@@ -1,0 +1,96 @@
+﻿@model HospitalManagementSystem.ViewModel.ReceptionistVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <a id="CreateNew" class="btn btn-success pull-right">ایجاد پذیرش جدید</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <h2>لیست پذیرش ها&nbsp;</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("CreateReceptionist", "Manager", FormMethod.Post, new { id = "CreateForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <table class="table" id="myTable">
+                        <tr>
+                            <th></th>
+                            <th>
+                                نام
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model.receptionists)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("ویرایش", "ReceptionistEdit", new { id = item.Id }, new { @class = "btn btn-primary opbtn" })
+                                    @Html.ActionLink("حذف", "DeleteReceptionist", new { id = item.Id }, new { @class = "btn btn-danger opbtn", onclick = "return confirm('مطمئن هستید?');" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="/Manager/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            var html = `
+                <tr id="CurrentRow" style="display:none">
+                    <td>
+                        <input type="submit" value="ایجاد" class="btn btn-success" />
+                        <input type="button" value="انصراف" class="btn btn-default" id="cancel" />
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.receptionist.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.receptionist.Name, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                `;
+
+            $('#myTable tr:last').after(html);
+
+            $("#CreateNew").click(function () {
+                $("#CurrentRow").show();
+            });
+
+            $("#cancel").click(function () {
+                $("#CurrentRow").hide();
+            });
+    });
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

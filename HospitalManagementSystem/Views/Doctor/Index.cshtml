@@ -1,0 +1,48 @@
+﻿@model HospitalManagementSystem.ViewModel.DoctorVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.ci == null)
+{
+    using (Html.BeginForm("Index", "Doctor", FormMethod.Post, new { id = "CreateForm" }))
+    {
+        <div class="col-sm-6 text-right">
+            <input type="submit" value="انتخاب" class="btn btn-success" />
+            @Html.DropDownList("id", Model.docs)
+            <span class="hospital-name-text">:پزشک</span>
+        </div>
+    }
+}
+else
+{
+    <br />
+    <div class="row">
+        <div class="col-sm-6"><span class="hospital-name-text">بیمارستان : نام بیمارستان</span></div>
+        <div class="col-sm-6 text-right"><span class="hospital-name-text">پزشک: @Model.doctor.Name</span><img src="~/Content/images/User3.png" /></div>
+    </div>
+    <br />
+    <div id="base-grid">
+        <div class="row">
+            <a href="/Doctor/Discharge">
+                <div class="col-sm-3 pull-right btn" id="tile1">
+                    <div class="row">
+                        <div class="col-sm-6"><img src="~/Content/images/cure.png" /></div>
+                        <div class="col-sm-6"><span id="tile1-main-text">ترخیص<br />بیمار</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 pull-left"><span id="tile1-second-text">Patient Discharge</span></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="/Main/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+

@@ -1,0 +1,69 @@
+﻿@model HospitalManagementSystem.ViewModel.BillVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12 text-right"><h2>ویرایش قبض</h2></div>
+
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.bill.Id)
+        <table class="table" id="myTable">
+            <tr>
+                <th></th>
+                <th>
+                    پذیرش
+                </th>
+                <th>
+                    بیمار
+                </th>
+                <th>
+                    مبلغ
+                </th>
+                <th>
+                    شماره قبض
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="ذخیره" class="btn btn-primary" />
+                    <a href="/Manager/Bill"><input type="button" value="انصراف" class="btn btn-default" /></a>
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.bill.ReceptionistId, Model.receptionists)
+                    @Html.ValidationMessageFor(model => model.bill.Receptionist, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.bill.PatientId, Model.patients)
+                    @Html.ValidationMessageFor(model => model.bill.PatientId, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.bill.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bill.Amount, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.bill.BillNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.bill.BillNo, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+        }
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <a href="/Manager/Bill"><img class="back" src="~/Content/images/back3.png" /></a>
+    </div>
+</div>
+<br />
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,68 @@
+﻿@model HospitalManagementSystem.ViewModel.ReceptionistVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.ci == null)
+{
+    using (Html.BeginForm("Index", "Receptionist", FormMethod.Post, new { id = "CreateForm" }))
+    {
+        <div class="col-sm-6 text-right">
+            <input type="submit" value="انتخاب" class="btn btn-success" />
+            @Html.DropDownList("id", Model.recs)
+            <span class="hospital-name-text">:پزشک</span>
+        </div>
+    }
+}
+else
+{
+    <br />
+    <div class="row">
+        <div class="col-sm-6"><span class="hospital-name-text">بیمارستان : نام بیمارستان</span></div>
+        <div class="col-sm-6 text-right"><span class="hospital-name-text">پذیرش: @Model.receptionist.Name</span><img src="~/Content/images/User3.png" /></div>
+    </div>
+    <br />
+    <div id="base-grid">
+        <div class="row">
+            <a href="/Receptionist/Reception">
+                <div class="col-sm-3 pull-right btn" id="tile1">
+                    <div class="row">
+                        <div class="col-sm-6"><img src="~/Content/images/Manager3.png" /></div>
+                        <div class="col-sm-6"><span id="tile1-main-text">پذیرش<br />بیمار</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 pull-left"><span id="tile1-second-text">Patient Reception</span></div>
+                    </div>
+                </div>
+            </a>
+            <a href="/Receptionist/MakeBill">
+                <div class="col-sm-3 pull-right btn" id="tile2">
+                    <div class="row">
+                        <div class="col-sm-6"><img src="~/Content/images/doctor.png" /></div>
+                        <div class="col-sm-6"><span id="tile2-main-text">ایجاد<br />قبض</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 pull-left"><span id="tile2-second-text">Make Bill</span></div>
+                    </div>
+                </div>
+            </a>
+            <a href="/Receptionist/PayBill">
+                <div class="col-sm-3 pull-right btn" id="tile3">
+                    <div class="row">
+                        <div class="col-sm-6"><img src="~/Content/images/receptionist.png" /></div>
+                        <div class="col-sm-6"><span id="tile3-main-text">پرداخت<br />قبض</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 pull-left"><span id="tile3-second-text">Pay Bill</span></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="/Main/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+        </div>
+    </div>
+}

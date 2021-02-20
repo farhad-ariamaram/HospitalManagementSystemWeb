@@ -1,0 +1,110 @@
+﻿@model List<HospitalManagementSystem.Models.Domain.Patient>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <h2>لیست بیماران&nbsp;</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                    @Html.AntiForgeryToken()
+                    <table class="table" id="myTable">
+                        <tr>
+                            <th></th>
+                            <th>
+                                پذیرش
+                            </th>
+                            <th>
+                                شماره اتاق
+                            </th>
+                            <th>
+                                پزشک
+                            </th>
+                            <th>
+                                جنسیت
+                            </th>
+                            <th>
+                                سن
+                            </th>
+                            <th>
+                                آدرس
+                            </th>
+                            <th>
+                                شماره تماس
+                            </th>
+                            <th>
+                                نام
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("ترخیص", "DischargePatient", new { id = item.Id }, new { @class = "btn btn-danger opbtn", onclick = "return confirm('مطمئن هستید?');" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Receptionist.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Room.Location)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Doctor.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                    <span>@((item.Gender) ?"مرد":"زن")</span>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <br />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="/Doctor/Index"><img class="back" src="~/Content/images/back3.png" /></a>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#patient_Gender").change(function () {
+                if (this.checked) {
+                    $("#gender").text("مرد");
+                } else {
+                    $("#gender").text("زن");
+                }
+            });
+    });
+    </script>
+}
