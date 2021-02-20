@@ -2,8 +2,10 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Publish
-http://farhadariamaram.somee.com/
-Project published on this url
+<h3>Project published on this url</h3>
+</br>
+<h3>http://farhadariamaram.somee.com/</h3>
+
 
 ## Overview
 - Hospital Management System web application
