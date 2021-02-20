@@ -20,13 +20,9 @@
   
   ![application.png](images/application.png)
   
-- Class Diagram
+  ![application.png](images/app2.png)
   
-  ![application.png](images/Class_Diagram.png)
-  
-- DataBase Model
-  
-  ![application.png](images/Database_Model.png)
+  ![application.png](images/app3.png)
 
 ## License
 
