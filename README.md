@@ -17,7 +17,7 @@
 
 - .NET Framework 4.7.2
 
-- Microsoft SQL Server 14.0
+- Microsoft SQL Server 14.0 Express
 
 ## Screenshot
 - Application
